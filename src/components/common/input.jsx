@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Input = ({name,placeholder,type = "text" ,...rest}) => {
+const Input = ({name,placeholder,type ,...rest}) => {
     return ( 
-        <input {...rest} name={name} id={name} placeholder={placeholder} type={type} className="form-control col-5"></input>
+        <input {...rest} name={name} id={name} placeholder={placeholder} type={type} className="form-control col-8 mt-5"></input>
      );
 }
  

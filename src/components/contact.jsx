@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Form from './common/form';
 
-import Input from './common/input';
 
+class Contact extends Form {
+    state = {}
+    render() {
+        
+       return (
+       <div className="container">
 
-class Contact extends Component {
-    state = {  }
-    render() { 
-        return ( 
-        <div>
-        <Input name="firstName" placeholder="First Name"  />
-        </div>
-        );
-    }
+            <form>
+                {this.renderInput('firstName','First Name')}
+                {this.renderInput('lastName','Last Name')}
+                {this.renderInput('email','Email','email')}
+                {this.renderButton('send')}
+            </form>
+         </div>
+       )}
 }
  
 export default Contact;
