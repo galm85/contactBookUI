@@ -1,18 +1,55 @@
-import React, { Component } from 'react';
-import Input from './input';
+import React, { Component } from "react";
+import Input from "./input";
+import Joi from "joi-browser";
 
 class Form extends Component {
+  validate() {
+    const { error } = Joi.validate(this.state.data, this.schema, {
+      abortEarly: false,
+    });
 
-    renderInput(name,placeholder,type="text",...rest){
-        return <Input {...rest} name={name} placeholder={placeholder} type={type}  />
+    if (!error) return null;
+
+    const errors = {};
+    for (const item of error.details) {
+      errors[item.path] = item.message;
     }
 
+    return errors;
+  }
 
-    renderButton(label){
-        return <button className="btn btn-dark mt-5">{label}</button>
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = this.validate();
+    this.setState({ errors });
+    if (!errors) {
+      this.doSubmit();
+      return;
     }
-   
-    
+    console.log(errors);
+  };
+
+  handleChange = ({ currentTarget: input }) => {
+    const data = { ...this.state.data };
+    data[input.name] = input.value;
+    this.setState({ data });
+  };
+
+  renderInput(name, placeholder, type = "text", ...rest) {
+    return (
+      <Input
+        {...rest}
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        onChange={this.handleChange}
+      />
+    );
+  }
+
+  renderButton(label) {
+    return <button className="btn btn-dark mt-5">{label}</button>;
+  }
 }
- 
+
 export default Form;
