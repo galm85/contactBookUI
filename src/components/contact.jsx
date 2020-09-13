@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import PageHeader from "./common/pageHeader";
 
 class Contact extends Form {
   state = {
@@ -27,6 +28,11 @@ class Contact extends Form {
   render() {
     return (
       <div className="container">
+        <PageHeader
+          title="Create a new Contact"
+          icon="fas fa-id-badge"
+        ></PageHeader>
+
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("firstName", "First Name")}
           {this.renderInput("lastName", "Last Name")}
@@ -34,8 +40,6 @@ class Contact extends Form {
           {this.renderInput("phone", "Phone")}
           {this.renderButton("send")}
         </form>
-
-        <span>{this.state.errors.firstName}</span>
       </div>
     );
   }
