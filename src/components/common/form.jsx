@@ -21,13 +21,12 @@ class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate();
-    this.setState({ errors });
+    this.setState({ errors: errors || {} });
 
     if (!errors) {
       this.doSubmit();
       return;
     }
-    console.log(errors);
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -37,7 +36,7 @@ class Form extends Component {
   };
 
   renderInput(name, placeholder, type = "text", ...rest) {
-    const {data, errors } = this.state;
+    const { data, errors } = this.state;
     return (
       <Input
         {...rest}
@@ -46,7 +45,7 @@ class Form extends Component {
         value={data[name]}
         placeholder={placeholder}
         onChange={this.handleChange}
-        // error={errors[name]}
+        error={errors[name]}
       />
     );
   }
